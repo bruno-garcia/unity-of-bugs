@@ -32,6 +32,7 @@ public class BugFarm : MonoBehaviour
     
     public void ThrowExceptionAndCatch()
     {
+        Application.ForceCrash();
         Debug.Log("Throwing an instance of 🐛 CustomException!");
 
         try
