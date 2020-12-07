@@ -87,6 +87,16 @@ public class BugFarm : MonoBehaviour
 #endif
     }
 
+    public void ThrowKotlinOnBackground()
+    {
+#if UNITY_ANDROID
+        var jo = new AndroidJavaObject("unity.of.bugs.KotlinPlugin");
+        jo.CallStatic("throwOnBackgroundThread");
+#else
+        Debug.LogWarning("Not on Android.");
+#endif
+    }
+
     public void CrashNative()
     {
         crash();
@@ -99,7 +109,7 @@ public class BugFarm : MonoBehaviour
     [MethodImpl(MethodImplOptions.NoInlining)]
     private void MethodB() => MethodA();
 
-    [DllImport("native")]
+    [DllImport("__Internal")]
     private static extern void crash();
 }
 
